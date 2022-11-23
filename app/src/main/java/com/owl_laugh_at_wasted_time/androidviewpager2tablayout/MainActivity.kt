@@ -35,17 +35,18 @@ class MainActivity : AppCompatActivity() {
         val pagerAdapter = PagerAdapter(this, words)
 
         pager.adapter = pagerAdapter
+        pager.isUserInputEnabled=false
 
-        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                pager.isUserInputEnabled = false
-            }
-        })
+//        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//            override fun onPageScrolled(
+//                position: Int,
+//                positionOffset: Float,
+//                positionOffsetPixels: Int
+//            ) {
+//                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//                pager.isUserInputEnabled = false
+//            }
+//        })
 
         skip.setOnClickListener {
             finish()
