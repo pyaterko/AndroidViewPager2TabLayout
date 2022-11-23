@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import androidx.viewpager2.widget.ViewPager2
 import com.example.viewpagerexample.PagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -14,76 +12,67 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity : AppCompatActivity() {
 
     val pager by lazy { findViewById<ViewPager2>(R.id.pager) }
+    val tabLayout by lazy { findViewById<TabLayout>(R.id.tabLayout) }
+    val skipButton by lazy { findViewById<Button>(R.id.skip) }
+    val onwardsButton by lazy { findViewById<Button>(R.id.onwards) }
+    val homeButton by lazy { findViewById<Button>(R.id.home) }
+    val activButton by lazy { findViewById<Button>(R.id.activ) }
+    val words = arrayListOf(
+        "One",
+        "Two",
+        "Three",
+        "Four",
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setViewPager(words)
+        setOnClickListeners()
+        initActivAndHomeButton()
+    }
 
-        val words = arrayListOf(
-            "One",
-            "Two",
-            "Three",
-            "Four",
-        )
-
-        val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
-        val skip = findViewById<Button>(R.id.skip)
-        val onwards = findViewById<Button>(R.id.onwards)
-        val home = findViewById<Button>(R.id.home)
-        val activ = findViewById<Button>(R.id.activ)
-
-        val pagerAdapter = PagerAdapter(this, words)
-
-        pager.adapter = pagerAdapter
-        pager.isUserInputEnabled=false
-
-//        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//            override fun onPageScrolled(
-//                position: Int,
-//                positionOffset: Float,
-//                positionOffsetPixels: Int
-//            ) {
-//                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-//                pager.isUserInputEnabled = false
-//            }
-//        })
-
-        skip.setOnClickListener {
-            finish()
-        }
-        onwards.setOnClickListener {
-            pager.setCurrentItem(getItem(1), true)
-        }
-        home.setOnClickListener {
-
-        }
-        activ.setOnClickListener {
-
-        }
-        //   pager.orientation = ViewPager2.ORIENTATION_VERTICAL
-        TabLayoutMediator(tabLayout, pager) { tab, position ->
-            //  tab.text = "${position + 1}"
-        }.attach()
-
+    private fun initActivAndHomeButton() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab?.position == words.size - 1) {
-                    skip.visibility = View.GONE
-                    onwards.visibility = View.GONE
-                    activ.visibility = View.VISIBLE
-                    home.visibility = View.VISIBLE
+                    skipButton.visibility = View.GONE
+                    onwardsButton.visibility = View.GONE
+                    activButton.visibility = View.VISIBLE
+                    homeButton.visibility = View.VISIBLE
                 } else {
-                    skip.visibility = View.VISIBLE
-                    onwards.visibility = View.VISIBLE
-                    activ.visibility = View.GONE
-                    home.visibility = View.GONE
+                    skipButton.visibility = View.VISIBLE
+                    onwardsButton.visibility = View.VISIBLE
+                    activButton.visibility = View.GONE
+                    homeButton.visibility = View.GONE
                 }
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+    }
+
+    private fun setViewPager(words: ArrayList<String>) {
+        val pagerAdapter = PagerAdapter(this, words)
+        pager.adapter = pagerAdapter
+        pager.isUserInputEnabled = false
+        TabLayoutMediator(tabLayout, pager) { tab, position ->
+        }.attach()
+    }
+
+    private fun setOnClickListeners() {
+        skipButton.setOnClickListener {
+            finish()
+        }
+        onwardsButton.setOnClickListener {
+            pager.setCurrentItem(getItem(1), true)
+        }
+        homeButton.setOnClickListener {
+
+        }
+        activButton.setOnClickListener {
+
+        }
     }
 
     private fun getItem(i: Int): Int {
