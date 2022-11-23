@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import androidx.viewpager2.widget.ViewPager2
 import com.example.viewpagerexample.PagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -30,9 +32,17 @@ class MainActivity : AppCompatActivity() {
         val home = findViewById<Button>(R.id.home)
         val activ = findViewById<Button>(R.id.activ)
 
-        val adapter = PagerAdapter(this, words)
+        val pagerAdapter = PagerAdapter(this, words)
 
-        pager.adapter = adapter
+        pager.adapter = pagerAdapter
+
+        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                pager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING && pager.currentItem == 0)
+            }
+        })
+
         skip.setOnClickListener {
             finish()
         }

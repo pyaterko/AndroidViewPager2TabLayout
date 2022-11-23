@@ -19,9 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
 
         />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
+    <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -30,6 +28,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:scrollbars="none"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/skip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+
+
+
 
     <Button
         android:id="@+id/skip"
@@ -43,6 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/onwards"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/onwards"
