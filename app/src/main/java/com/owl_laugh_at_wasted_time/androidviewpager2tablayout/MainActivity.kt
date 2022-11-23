@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)
-                pager.isUserInputEnabled = !(state == SCROLL_STATE_DRAGGING && pager.currentItem == 0)
+                pager.isUserInputEnabled = false
+
             }
         })
 
