@@ -8,32 +8,21 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.owl_laugh_at_wasted_time.androidviewpager2tablayout.R
+import com.owl_laugh_at_wasted_time.androidviewpager2tablayout.databinding.PageLayoutBinding
 
-class PagerAdapter(private val context: Context, private val words: List<String>) :
+class PagerAdapter(private val words: List<String>) :
     RecyclerView.Adapter<PagerAdapter.PageHolder>() {
 
-    var onClickListenerSkip: (() -> Unit)? = null
-    var onClickListenerOnwards: (() -> Unit)? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageHolder =
-        PageHolder(LayoutInflater.from(context).inflate(R.layout.page_layout, parent, false))
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageHolder{
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = PageLayoutBinding.inflate(inflater, parent, false)
+        return PageHolder(binding)
+    }
     override fun onBindViewHolder(holder: PageHolder, position: Int) {
-        holder.textView.text = words[position]
-//        holder.skip.setOnClickListener {
-//            onClickListenerSkip?.invoke()
-//        }
-//        holder.onwards.setOnClickListener {
-//            onClickListenerOnwards?.invoke()
-//        }
-
+        holder.view.textView.text = words[position]
     }
 
     override fun getItemCount(): Int = words.size
 
-    inner class PageHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView = view.findViewById<TextView>(R.id.textView)
-//        val skip = view.findViewById<Button>(R.id.skip)
-//        val onwards = view.findViewById<TextView>(R.id.onwards)
-    }
+    inner class PageHolder( val view: PageLayoutBinding) : RecyclerView.ViewHolder(view.root)
 }
