@@ -3,13 +3,10 @@ package com.owl_laugh_at_wasted_time.androidviewpager2tablayout
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.example.viewpagerexample.PagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.owl_laugh_at_wasted_time.androidviewpager2tablayout.databinding.ActivityMainBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,24 +32,26 @@ class MainActivity : AppCompatActivity() {
             if (action == BottomButtonAction.POSITIVE &&
                 binding.bottomButton.getPositiveButtonText() == "Далее"
             ) {
-                binding.bottomButton.isProgressMode = true
-                lifecycleScope.launch {
-                    delay(1000)
-                    binding.bottomButton.isProgressMode = false
-                    binding.pager.setCurrentItem(getItem(1), true)
-                }
+
+                binding.pager.setCurrentItem(getItem(1), true)
+//                binding.bottomButton.isProgressMode = true
+//                lifecycleScope.launch {
+//                    delay(1000)
+//                    binding.bottomButton.isProgressMode = false
+//                    binding.pager.setCurrentItem(getItem(1), true)
+//                }
             } else if (action == BottomButtonAction.POSITIVE &&
                 binding.bottomButton.getPositiveButtonText() == "На главную"
             ) {
-               Toast.makeText(this,"На главную",Toast.LENGTH_LONG).show()
-            }else  if (action == BottomButtonAction.NEGATIVE &&
+                Toast.makeText(this, "На главную", Toast.LENGTH_LONG).show()
+            } else if (action == BottomButtonAction.NEGATIVE &&
                 binding.bottomButton.getNegativeButtonText() == "Пропустить"
             ) {
-                Toast.makeText(this,"Пропустить",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Пропустить", Toast.LENGTH_LONG).show()
             } else if (action == BottomButtonAction.NEGATIVE &&
                 binding.bottomButton.getNegativeButtonText() == "Активировать"
             ) {
-                Toast.makeText(this,"Активировать",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Активировать", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -77,10 +76,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setViewPager(words: ArrayList<String>) {
-        val pagerAdapter = PagerAdapter(words)
+        val pagerAdapter = PagerAdapter()
+        pagerAdapter.words = words
         binding.pager.adapter = pagerAdapter
         binding.pager.isUserInputEnabled = false
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+            tab.view.isClickable = false
         }.attach()
     }
 

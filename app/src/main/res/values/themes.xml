@@ -60,4 +60,5 @@
     <style name="MyBottomButtonsStyle">
         <item name="bottomPositiveBackgroundColor">#ff8800</item>
     </style>
+
 </resources>
