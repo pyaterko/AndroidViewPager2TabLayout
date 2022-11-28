@@ -1,6 +1,7 @@
 package com.owl_laugh_at_wasted_time.androidviewpager2tablayout
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.viewpagerexample.PagerAdapter
@@ -43,7 +44,15 @@ class MainActivity : AppCompatActivity() {
             } else if (action == BottomButtonAction.POSITIVE &&
                 binding.bottomButton.getPositiveButtonText() == "На главную"
             ) {
-                finish()
+               Toast.makeText(this,"На главную",Toast.LENGTH_LONG).show()
+            }else  if (action == BottomButtonAction.NEGATIVE &&
+                binding.bottomButton.getNegativeButtonText() == "Пропустить"
+            ) {
+                Toast.makeText(this,"Пропустить",Toast.LENGTH_LONG).show()
+            } else if (action == BottomButtonAction.NEGATIVE &&
+                binding.bottomButton.getNegativeButtonText() == "Активировать"
+            ) {
+                Toast.makeText(this,"Активировать",Toast.LENGTH_LONG).show()
             }
         }
     }
