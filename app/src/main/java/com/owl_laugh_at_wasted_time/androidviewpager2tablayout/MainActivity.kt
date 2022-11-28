@@ -25,12 +25,12 @@ class MainActivity : AppCompatActivity() {
         setViewPager(words)
         initActivAndHomeButton()
 
-        binding.bottomButton.setPositiveButtonText("Далее")
-        binding.bottomButton.setNegativeButtonText("Пропустить")
+        binding.bottomButton.setPositiveButtonText("ДАЛЕЕ")
+        binding.bottomButton.setNegativeButtonText("ПРОПУСТИТЬ")
 
         binding.bottomButton.setListener { action ->
             if (action == BottomButtonAction.POSITIVE &&
-                binding.bottomButton.getPositiveButtonText() == "Далее"
+                binding.bottomButton.getPositiveButtonText() == "ДАЛЕЕ"
             ) {
 
                 binding.pager.setCurrentItem(getItem(1), true)
@@ -41,15 +41,15 @@ class MainActivity : AppCompatActivity() {
 //                    binding.pager.setCurrentItem(getItem(1), true)
 //                }
             } else if (action == BottomButtonAction.POSITIVE &&
-                binding.bottomButton.getPositiveButtonText() == "На главную"
+                binding.bottomButton.getPositiveButtonText() == "НА ГЛАВНУЮ"
             ) {
                 Toast.makeText(this, "На главную", Toast.LENGTH_LONG).show()
             } else if (action == BottomButtonAction.NEGATIVE &&
-                binding.bottomButton.getNegativeButtonText() == "Пропустить"
+                binding.bottomButton.getNegativeButtonText() == "ПРОПУСТИТЬ"
             ) {
                 Toast.makeText(this, "Пропустить", Toast.LENGTH_LONG).show()
             } else if (action == BottomButtonAction.NEGATIVE &&
-                binding.bottomButton.getNegativeButtonText() == "Активировать"
+                binding.bottomButton.getNegativeButtonText() == "АКТИВИРОВАТЬ"
             ) {
                 Toast.makeText(this, "Активировать", Toast.LENGTH_LONG).show()
             }
@@ -63,11 +63,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     if (tab?.position == words.size - 1) {
-                        binding.bottomButton.setPositiveButtonText("На главную")
-                        binding.bottomButton.setNegativeButtonText("Активировать")
+                        binding.bottomButton.setPositiveButtonText("НА ГЛАВНУЮ")
+                        binding.bottomButton.setNegativeButtonText("АКТИВИРОВАТЬ")
                     } else {
-                        binding.bottomButton.setPositiveButtonText("Далее")
-                        binding.bottomButton.setNegativeButtonText("Пропустить")
+                        binding.bottomButton.setPositiveButtonText("ДАЛЕЕ")
+                        binding.bottomButton.setNegativeButtonText("ПРОПУСТИТЬ")
                     }
                 }
             })
