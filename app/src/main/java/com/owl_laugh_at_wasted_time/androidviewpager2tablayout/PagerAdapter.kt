@@ -19,10 +19,16 @@ class PagerAdapter(private val words: List<String>) :
         return PageHolder(binding)
     }
     override fun onBindViewHolder(holder: PageHolder, position: Int) {
-        holder.view.textView.text = words[position]
+        val text=words[position]
+        holder.bind(text)
     }
 
     override fun getItemCount(): Int = words.size
 
-    inner class PageHolder( val view: PageLayoutBinding) : RecyclerView.ViewHolder(view.root)
+    inner class PageHolder( val view: PageLayoutBinding) : RecyclerView.ViewHolder(view.root){
+       fun bind(text:String){
+           view.textView.text = "$text RecyclerView.Adapter<PagerAdapter.PageHolder>RecyclerView.Adapter<PagerAdapter.PageHolder>"
+       }
+    }
+
 }
