@@ -27,7 +27,7 @@ class PagerAdapter(private val words: List<String>) :
 
     inner class PageHolder( val view: PageLayoutBinding) : RecyclerView.ViewHolder(view.root){
        fun bind(text:String){
-           view.textView.text = "$text RecyclerView.Adapter<PagerAdapter.PageHolder>RecyclerView.Adapter<PagerAdapter.PageHolder>"
+           view.textView.text = text
        }
     }
 

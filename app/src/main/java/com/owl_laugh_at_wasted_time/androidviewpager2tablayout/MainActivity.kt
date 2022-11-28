@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     val words = arrayListOf(
         "One",
-        "Two",
+        "Two если сделать для одного из слайдов текст подлиннее - он не вмещается на страницу",
         "Three",
         "Four",
     )
