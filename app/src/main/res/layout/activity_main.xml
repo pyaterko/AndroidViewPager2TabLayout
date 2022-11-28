@@ -25,6 +25,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:scrollbars="none"
+        android:background="@color/white"
         android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomButton"
         app:layout_constraintEnd_toEndOf="parent"
