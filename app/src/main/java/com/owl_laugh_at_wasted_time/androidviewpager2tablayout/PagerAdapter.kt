@@ -1,6 +1,7 @@
 package com.example.viewpagerexample
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,12 @@ class PagerAdapter(private val words: List<String>) :
 
     override fun getItemCount(): Int = words.size
 
-    inner class PageHolder( val view: PageLayoutBinding) : RecyclerView.ViewHolder(view.root){
+    inner class PageHolder(
+        val view: PageLayoutBinding
+        ) : RecyclerView.ViewHolder(view.root){
        fun bind(text:String){
            view.textView.text = text
+         //  view.imageView.setBackgroundColor(Color.GRAY)
        }
     }
 
