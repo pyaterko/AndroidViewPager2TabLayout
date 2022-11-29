@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     if (tab?.position == words.size - 1) {
-                        binding.bottomButton.replaysListener { action ->
+                        binding.bottomButton.replaceListener { action ->
                             if (action == BottomButtonAction.POSITIVE) {
                                 Toast.makeText(this@MainActivity, "На главную", Toast.LENGTH_LONG).show()
                             }else{

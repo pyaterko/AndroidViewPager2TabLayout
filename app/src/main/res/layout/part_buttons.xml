@@ -22,8 +22,6 @@
         app:rippleColor="#d8d8d8"
         tools:text="Negative Button" />
 
-
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/positiveButton"
         android:layout_width="0dp"

@@ -97,7 +97,7 @@ class BottomButtonsView @JvmOverloads constructor(
         }
     }
 
-    fun replaysListener(listener: NextListener?) {
+    fun replaceListener(listener: NextListener?) {
         this.listener = null
         nextListener = listener
         binding.positiveButton.setOnClickListener {
