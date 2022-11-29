@@ -3,10 +3,13 @@ package com.owl_laugh_at_wasted_time.androidviewpager2tablayout
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.viewpagerexample.PagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.owl_laugh_at_wasted_time.androidviewpager2tablayout.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,29 +32,15 @@ class MainActivity : AppCompatActivity() {
         binding.bottomButton.setNegativeButtonText("ПРОПУСТИТЬ")
 
         binding.bottomButton.setListener { action ->
-            if (action == BottomButtonAction.POSITIVE &&
-                binding.bottomButton.getPositiveButtonText() == "ДАЛЕЕ"
-            ) {
-
-                binding.pager.setCurrentItem(getItem(1), true)
-//                binding.bottomButton.isProgressMode = true
-//                lifecycleScope.launch {
-//                    delay(1000)
-//                    binding.bottomButton.isProgressMode = false
-//                    binding.pager.setCurrentItem(getItem(1), true)
-//                }
-            } else if (action == BottomButtonAction.POSITIVE &&
-                binding.bottomButton.getPositiveButtonText() == "НА ГЛАВНУЮ"
-            ) {
-                Toast.makeText(this, "На главную", Toast.LENGTH_LONG).show()
-            } else if (action == BottomButtonAction.NEGATIVE &&
-                binding.bottomButton.getNegativeButtonText() == "ПРОПУСТИТЬ"
-            ) {
+            if (action == BottomButtonAction.POSITIVE) {
+                binding.bottomButton.isProgressMode = true
+                lifecycleScope.launch {
+                    delay(1000)
+                    binding.bottomButton.isProgressMode = false
+                    binding.pager.setCurrentItem(getItem(1), true)
+                }
+            } else if (action == BottomButtonAction.NEGATIVE) {
                 Toast.makeText(this, "Пропустить", Toast.LENGTH_LONG).show()
-            } else if (action == BottomButtonAction.NEGATIVE &&
-                binding.bottomButton.getNegativeButtonText() == "АКТИВИРОВАТЬ"
-            ) {
-                Toast.makeText(this, "Активировать", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -63,6 +52,13 @@ class MainActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     if (tab?.position == words.size - 1) {
+                        binding.bottomButton.replaysListener { action ->
+                            if (action == BottomButtonAction.POSITIVE) {
+                                Toast.makeText(this@MainActivity, "На главную", Toast.LENGTH_LONG).show()
+                            }else{
+                                Toast.makeText(this@MainActivity, "Активировать", Toast.LENGTH_LONG).show()
+                            }
+                        }
                         binding.bottomButton.setPositiveButtonText("НА ГЛАВНУЮ")
                         binding.bottomButton.setNegativeButtonText("АКТИВИРОВАТЬ")
                     } else {

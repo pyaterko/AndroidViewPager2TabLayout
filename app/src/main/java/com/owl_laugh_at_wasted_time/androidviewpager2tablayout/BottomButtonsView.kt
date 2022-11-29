@@ -17,6 +17,7 @@ enum class BottomButtonAction {
 }
 
 typealias OnBottomButtonsActionListener = (BottomButtonAction) -> Unit
+typealias NextListener = (BottomButtonAction) -> Unit
 
 class BottomButtonsView @JvmOverloads constructor(
     context: Context,
@@ -42,6 +43,7 @@ class BottomButtonsView @JvmOverloads constructor(
     private val binding: PartButtonsBinding
 
     private var listener: OnBottomButtonsActionListener? = null
+    private var nextListener: NextListener? = null
 
     init {
         val inflater = LayoutInflater.from(context)
@@ -95,6 +97,27 @@ class BottomButtonsView @JvmOverloads constructor(
         }
     }
 
+    fun replaysListener(listener: NextListener?) {
+        this.listener = null
+        nextListener = listener
+        binding.positiveButton.setOnClickListener {
+           nextListener?.invoke(BottomButtonAction.POSITIVE)
+        }
+        binding.negativeButton.setOnClickListener {
+           nextListener?.invoke(BottomButtonAction.NEGATIVE)
+        }
+    }
+
+    fun hideNegativeButton() {
+        binding.negativeButton.isClickable = false
+        binding.negativeButton.visibility = View.INVISIBLE
+    }
+
+    fun showNegativeButton() {
+        binding.negativeButton.isClickable = true
+        binding.negativeButton.visibility = View.VISIBLE
+    }
+
     fun setListener(listener: OnBottomButtonsActionListener?) {
         this.listener = listener
     }
@@ -106,10 +129,11 @@ class BottomButtonsView @JvmOverloads constructor(
     fun setNegativeButtonText(text: String?) {
         binding.negativeButton.text = text ?: "Cancel"
     }
-    fun getPositiveButtonText()=
+
+    fun getPositiveButtonText() =
         binding.positiveButton.text.toString()
 
-    fun getNegativeButtonText()=
+    fun getNegativeButtonText() =
         binding.negativeButton.text.toString()
 
     override fun onSaveInstanceState(): Parcelable {

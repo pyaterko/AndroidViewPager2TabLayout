@@ -11,32 +11,28 @@
         android:id="@+id/negativeButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="6dp"
         android:freezesText="true"
         android:paddingVertical="14dp"
         android:textColor="@color/black"
         app:cornerRadius="8dp"
-        app:layout_constraintEnd_toStartOf="@id/space"
+        app:layout_constraintEnd_toStartOf="@id/positiveButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="#d8d8d8"
         tools:text="Negative Button" />
 
-    <Space
-        android:id="@+id/space"
-        android:layout_width="12dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/positiveButton"
-        app:layout_constraintStart_toEndOf="@id/negativeButton"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/positiveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="6dp"
         android:paddingVertical="14dp"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/space"
+        app:layout_constraintStart_toEndOf="@id/negativeButton"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Positive Button" />
 
