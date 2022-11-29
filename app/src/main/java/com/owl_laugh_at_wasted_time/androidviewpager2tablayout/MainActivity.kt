@@ -26,10 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setViewPager(words)
-        initActivAndHomeButton()
-
-        binding.bottomButton.setPositiveButtonText("ДАЛЕЕ")
-        binding.bottomButton.setNegativeButtonText("ПРОПУСТИТЬ")
+        setButton()
 
         binding.bottomButton.setListener { action ->
             if (action == BottomButtonAction.POSITIVE) {
@@ -45,8 +42,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initActivAndHomeButton() {
+    private fun setButton() {
         with(binding) {
+            bottomButton.setPositiveButtonText("ДАЛЕЕ")
+            bottomButton.setNegativeButtonText("ПРОПУСТИТЬ")
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabUnselected(tab: TabLayout.Tab?) {}
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
@@ -54,9 +53,11 @@ class MainActivity : AppCompatActivity() {
                     if (tab?.position == words.size - 1) {
                         binding.bottomButton.replaceListener { action ->
                             if (action == BottomButtonAction.POSITIVE) {
-                                Toast.makeText(this@MainActivity, "На главную", Toast.LENGTH_LONG).show()
-                            }else{
-                                Toast.makeText(this@MainActivity, "Активировать", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@MainActivity, "На главную", Toast.LENGTH_LONG)
+                                    .show()
+                            } else {
+                                Toast.makeText(this@MainActivity, "Активировать", Toast.LENGTH_LONG)
+                                    .show()
                             }
                         }
                         binding.bottomButton.setPositiveButtonText("НА ГЛАВНУЮ")
